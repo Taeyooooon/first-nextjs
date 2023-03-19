@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const products = ['shirt', 'pants', 'skirt'];
 
-const page = () => {
+const ProductPage = () => {
   return (
     <div>
       Products page!!
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProductPage;
