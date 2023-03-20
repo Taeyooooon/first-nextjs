@@ -1,12 +1,13 @@
+import { getProduct, getProducts } from '@/service/products';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-interface Props {
+type Props = {
   params: {
     slug: string;
   };
-}
+};
 
 // SEO 작업 generateMetadata
 export function generateMetadata({ params }: Props) {
@@ -15,22 +16,19 @@ export function generateMetadata({ params }: Props) {
   };
 }
 
-export default function page({ params }: Props) {
-  if (params.slug === 'nothing') {
+export default async function ProductPage({ params: { slug } }: Props) {
+  const product = await getProduct(slug);
+  if (!product) {
     notFound();
   }
-
-  return (
-    <>
-      <div>{params.slug} 제품 설명 페이지!!</div>
-    </>
-  );
+  return <h1>{product.name} 제품 설명 페이지!!</h1>;
 }
 
 // generateStaticParams = SSG 미리생성
-export function generateStaticParams() {
-  const products = ['pants', 'skirt'];
-  return products.map((products) => {
-    slug: products;
+export async function generateStaticParams() {
+  const products = await getProducts();
+
+  return products.map((product) => {
+    slug: product.id;
   });
 }
