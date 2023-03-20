@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+// ISR : 3초마다 revalidate
+export const revalidate = 3;
+
 type Props = {
   params: {
     slug: string;
