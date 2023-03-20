@@ -1,4 +1,5 @@
 import { getProduct, getProducts } from '@/service/products';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -24,7 +25,12 @@ export default async function ProductPage({ params: { slug } }: Props) {
   if (!product) {
     notFound();
   }
-  return <h1>{product.name} 제품 설명 페이지!!</h1>;
+  return (
+    <>
+      <h1>{product.name} 제품 설명 페이지!!</h1>
+      <Image src={product.image} alt={'product'} width={400} height={400} />
+    </>
+  );
 }
 
 // generateStaticParams = SSG 미리생성

@@ -1,7 +1,9 @@
 import MeowArticle from '@/components/MeowArticle';
 import { getProducts } from '@/service/products';
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
+import clothesImage from '../../../public/images/clothes.jpg';
 
 // ISR : 3초마다 revalidate
 // export const revalidate = 3;
@@ -17,6 +19,7 @@ export default async function ProductsPage() {
   return (
     <>
       <h1>제품 소개 페이지!!</h1>
+      <Image src={clothesImage} alt='Clothes' priority /> {/* 가장 중요한 이미지에 priority 속성 주면 먼저 로딩 */}
       <ul>
         {products.map(({ id, name }, index) => {
           return (
